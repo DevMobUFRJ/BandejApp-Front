@@ -83,5 +83,14 @@ self.addEventListener('message', (event) => {
 /*-------------------- Lógica extra para o Service Worker --------------------*/
 
 onBackgroundMessage(FCM, (payload) => {
-    console.log('[firebase-messaging-sw.js] Received background message ', payload);
+    const dadosNotif = payload.data;
+    console.log(dadosNotif);
+
+    if(dadosNotif) {
+        self.registration.showNotification(dadosNotif.title, {
+            body: dadosNotif.body,
+            badge: dadosNotif.badge,
+            icon: dadosNotif.icon
+        })
+    }
 });
