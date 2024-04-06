@@ -1,4 +1,4 @@
-import { PopSection, PopLink, PopSubtitle } from "./style";
+import { PopSection, PopLink, PopSubtitle } from "../../Components/PopUp/style";
 
 type credito = {
     versao: string;
