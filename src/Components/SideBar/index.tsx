@@ -9,7 +9,7 @@ import { CloseSide, InstitutoDiv, ItemName,
 
 import { global } from "../../globalStyle";
 import { fecharSideBar } from "../../Functions/SideBar/abrirEfechar";
-import Creditos from "../PopUp/Creditos";
+import Creditos from "../../Functions/PopUps/Creditos";
 
 import Logo from '../../Assets/SideBar/logo.svg';
 import Close from '../../Assets/Close.svg';
@@ -29,7 +29,7 @@ export default function SideBar() {
     const history = useHistory();
 
     const rotaAtual = (onde: string):boolean => {
-        return (history.location.pathname === onde)
+        return (history.location.pathname === onde);
     }
 
     const nomesTelas = ['Cardapio', 'Comunicados', 'Avaliação', 'Informações', 'Fale conosco'];
@@ -48,10 +48,9 @@ export default function SideBar() {
                 </Versao>
             </SideHeader>
 
-            <PopUp popID='creditos' titulo="Créditos"
+            <PopUp popID='creditos' titulo='Créditos'
                 opcoes={['Fechar']} tiposOpcoes={[0]}
-                funcoesOpcoes={[mostrarPopup]}
-                componente={<Creditos/>}
+                funcoesOpcoes={[mostrarPopup]} componente={<Creditos/>}
             />
 
 {/*--------------------------------------------------------------------------*/}

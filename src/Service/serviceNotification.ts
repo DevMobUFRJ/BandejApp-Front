@@ -3,13 +3,13 @@ import { getToken } from 'firebase/messaging';
 import { getMessaging } from 'firebase/messaging/sw';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAJqt1FsFb42kzmLuTqf0XF4AwNYcxqrPc",
-    authDomain: "bandejapp-ea918.firebaseapp.com",
-    projectId: "bandejapp-ea918",
-    storageBucket: "bandejapp-ea918.appspot.com",
-    messagingSenderId: "1047645357942",
-    appId: "1:1047645357942:web:2f3f5810793dbd87349c57",
-    measurementId: "G-EWYDXZMRF3"
+    apiKey: "AIzaSyDXV7C9l_JKyFjG9W1AbY5-x2C8PdP4oLo",
+    authDomain: "bandejapp-73d9a.firebaseapp.com",
+    projectId: "bandejapp-73d9a",
+    storageBucket: "bandejapp-73d9a.appspot.com",
+    messagingSenderId: "1033790459132",
+    appId: "1:1033790459132:web:47dd564a20dc15caec9b79",
+    measurementId: "G-BLP8G81BZ2"
 };
 
 const firebase = initializeApp(firebaseConfig);
@@ -19,7 +19,7 @@ export function registrarNoFCM(serviceAtual: ServiceWorkerRegistration) {
 
     if(Notification.permission !== 'granted') {
         Notification.requestPermission().then(permissao => {
-            console.log(`Notificações: ${permissao}`)
+            console.log(`Notificações: ${permissao}`);
         }).catch(error => console.log(`[ERRO] Notificações: ${error}`));
     }
 
@@ -27,11 +27,9 @@ export function registrarNoFCM(serviceAtual: ServiceWorkerRegistration) {
         if(localStorage.getItem('tokenFCM') === null) {
             const token = await getToken(FCM, {
                 serviceWorkerRegistration: serviceAtual,
-                vapidKey: 'BE3bbEGaD8jYhX9hFS51VBPNAN5UkbSiQvpn0Ui7CbPvnvm-ybGqIcEYUF8Jfo7PPNImNkrgIxhZjHkmCvPVTY8'
+                vapidKey: 'BDTjdUhkSoZwgRG9QlX1Or-lEbRPIMNujH2d07MSz1ombadFxZ4Izqsv7iZEhnEf-n3y0Eprp0TQEcXi_Co1jIc'
             }).then(token => {return token})
             .catch(error => console.log(`[ERRO] Token: ${error}`));
-
-            console.log(`TOKEN: ${token}`);
 
             fetch(`${process.env.REACT_APP_REGISTRO_TOKEN}`, {
                 method: 'post',

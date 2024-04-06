@@ -84,7 +84,6 @@ self.addEventListener('message', (event) => {
 
 onBackgroundMessage(FCM, (payload) => {
     const dadosNotif = payload.data;
-    console.log(dadosNotif);
 
     if(dadosNotif) {
         self.registration.showNotification(dadosNotif.title, {
