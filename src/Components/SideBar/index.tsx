@@ -44,7 +44,7 @@ export default function SideBar() {
         <SideBarDiv id="sidebar">
             <SideHeader>
                 <LogoImg src={Logo} alt="Logo do aplicativo BandejApp."/>
-                <Versao>Versão 1.0.3 · <MostrarCreditos onClick={() => mostrarPopup('creditos')}>
+                <Versao>Versão 1.0.4 · <MostrarCreditos onClick={() => mostrarPopup('creditos')}>
                         Ver créditos
                     </MostrarCreditos>
                 </Versao>
