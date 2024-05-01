@@ -44,7 +44,7 @@ export default function SideBar() {
         <SideBarDiv id="sidebar">
             <SideHeader>
                 <LogoImg src={Logo} alt="Logo do aplicativo BandejApp."/>
-                <Versao>Versão 1.0.3 · <MostrarCreditos onClick={() => mostrarPopup('creditos')}>
+                <Versao>Versão 1.0.4 · <MostrarCreditos onClick={() => mostrarPopup('creditos')}>
                         Ver créditos
                     </MostrarCreditos>
                 </Versao>
@@ -86,10 +86,10 @@ export default function SideBar() {
 
             <InstitutoDiv>
                 <img src={LogoUFRJ} style={{width: '35%'}}
-                alt="Logo do Institudo de Computação da UFRJ."/>
-                <Linha/>
-                <img src={LogoDevmob} style={{width: '22%', padding: '0 6.5% 0 6.5%'}}
                 alt="Logo da Universidade Federal do Rio de Janeiro."/>
+                <Linha/>
+                <img src={LogoIC} style={{width: '35%'}}
+                alt="Logo do Institudo de Computação da UFRJ."/>
             </InstitutoDiv>
 
             <FecharDiv onClick={fecharSideBar} >
