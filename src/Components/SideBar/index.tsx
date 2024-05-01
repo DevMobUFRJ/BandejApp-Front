@@ -89,7 +89,7 @@ export default function SideBar() {
                 alt="Logo da Universidade Federal do Rio de Janeiro."/>
                 <Linha/>
                 <img src={LogoIC} style={{width: '35%'}}
-                alt="Logo do Institudo de Computação da UFRJ."/>
+                alt="Logo do Instituto de Computação da UFRJ."/>
             </InstitutoDiv>
 
             <FecharDiv onClick={fecharSideBar} >
