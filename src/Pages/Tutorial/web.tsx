@@ -54,7 +54,7 @@ export default function TutorialWeb({ history, mostrarPopup, page, inicio, titul
                 </LogoDiv>
 
                 <PageContent>
-                    <PageDescription style={{ textAlign: 'center' }}>
+                    <PageDescription style={{ textAlign: 'center', width: '100%' }}>
                         Tenha o cardápio do bandejão onde<br />e quando você precisar
                     </PageDescription>
 
@@ -91,7 +91,8 @@ export default function TutorialWeb({ history, mostrarPopup, page, inicio, titul
 
                 <PageContent style={{ alignItems: 'start', padding: '0 10.937vw', boxSizing: 'border-box' }}>
                     <PageTitle>{`${titulos[page]}`}</PageTitle>
-                    <PageDescription style={{paddingBottom: '1.562vw'}}>{`${descricoes[page]}`}</PageDescription>
+                    {/* <PageDescription style={{paddingBottom: '1.562vw'}}>{`${descricoes[page]}`}</PageDescription> */}
+                    <PageDescription style={{paddingBottom: '2.78vh'}}>{`${descricoes[page]}`}</PageDescription>
 
                     <ButtonDiv>
                         <PrevNext className="prevButton"

@@ -21,6 +21,23 @@ export const TutDiv = styled.div `
         transform: translate(200%, -50%);
     }
 
+    @media screen and (max-height: 1100px) {
+        .prevTemplate {
+            transform: translate(-300%, -50%);
+        }
+        .nextTemplate {
+            transform: translate(300%, -50%);
+        }
+    }
+
+    @media screen and (max-height: 550px) {
+        .prevTemplate {
+            transform: translate(-400%, -50%);
+        }
+        .nextTemplate {
+            transform: translate(400%, -50%);
+        }
+    }
 `;
 
 /*----------------------------------------------------------------------------*/
@@ -46,11 +63,6 @@ export const LogoDiv = styled.div `
     justify-content: center;                        
 
     background-color: ${global.colors.laranja};
-
-
-    @media screen and (max-width: 1140px) {
-        height: 75vh;
-    }
 `;
 
 export const PageContent = styled.div `
@@ -59,22 +71,14 @@ export const PageContent = styled.div `
     width: 100vw;
     height: 34.028vh;
 
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
     justify-content: center;
     align-items: center;
     
     background-color: ${global.colors.branco};
-
-    @media screen and (max-width: 1140px) {
-        height: 25vh;
-    }
 `;
 
 export const Logo = styled.img `
-    width: 25.312vw;
+    height: 45vh;
 `;
 
 export const StartDiv = styled.div `
@@ -93,11 +97,11 @@ export const StartDiv = styled.div `
 
 export const StartSkip = styled.button `
     width: 24.75vw;
-    height: 3.75vw;
+    height: 6.67vh;
 
     font-family: ${global.fonts.quickSand};
     font-weight: 700;
-    font-size: 1.25vw;
+    font-size: 2.22vh;
 
     color: white;
     background-color: ${global.colors.laranja};
@@ -117,14 +121,14 @@ export const StartSkip = styled.button `
 export const CurrentDiv = styled.div `
     display: flex;
 
-    padding: 1.718vw 10.9375vw 0;
+    padding: 3.06vh 10.9375vw 0;
 
     justify-content: space-between;
 `;
 
 export const CurrentPage = styled.div `
     width: 18.125vw;
-    height: 0.625vw;
+    height: 1.11vh;
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.24);
 `;
@@ -132,27 +136,19 @@ export const CurrentPage = styled.div `
 /*----------------------------------------------------------------------------*/
 
 export const PageTitle = styled.h1 `
-    font-size: 1.700vw;
+    font-size: 3.33vh;
     font-weight: 700;
     font-family: ${global.fonts.quickSand};
-
-    @media screen and (max-width: 1140px) {
-        font-size: 1.875vw;
-    }
 `;
 
 export const PageDescription = styled.p `
-    padding-bottom: 3.75vw;
-    width: 35vw;
+    padding-bottom: 6.67vh;
+    width: 35vw;                                            
 
-    font-size: 1.700vw;
+    font-size: 3.33vh;
     font-weight: 500;
     font-family: ${global.fonts.quickSand};
     color: ${global.colors.cinza};
-
-    @media screen and (max-width: 1140px) {
-        font-size: 1.875vw;
-    }
 `;
 
 /*----------------------------------------------------------------------------*/
@@ -161,28 +157,23 @@ export const BackDiv = styled.div `
     width: 100vw;
     height: 65.972vh;
     background-color: ${global.colors.laranja};
-
-    @media screen and (max-width: 1140px) {
-        height: 75vh;
-    }
 `;
 
 export const TemplateDiv = styled.div `
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: calc(100% - 2.343vw);
+    height: calc(100% - 4.17vh);
 
     position: relative;                        
 `;
 
 export const Template = styled.img `
-    width: 58.281vw;
+    height: 54.81vh;
 
     z-index: 99;
     position: absolute;
 
-    // left: -53vw;
     left: 50%;
     top: 52%;
 
@@ -201,9 +192,9 @@ export const ButtonDiv = styled.div `
 
 export const PrevNext = styled.button `
     width: 24.75vw;
-    height: 3.75vw;
+    height: 6.67vh;
 
-    font-size: 1.25vw;
+    font-size: 2.22vh;
     font-weight: 700;
     font-family: ${global.fonts.quickSand};
 
