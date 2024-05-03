@@ -18,33 +18,44 @@ type Nome = {
 const boxshadow = "0px 4px 4px 0px rgba(0, 0, 0, 0.25)";
 let aberto = true;
 
-const fadeAjustes = (abrindo: boolean, setOpcoes: Function) => {
+const abreAjustes = (setOpcoes?: Function) => {
     const acoes = document.getElementById('acoes');
     const conteudo = document.getElementById('conteudo');
-    if (!acoes || !conteudo)
+    if (!acoes || !conteudo || !setOpcoes)
         return;
 
     requestAnimationFrame(() => {
-        if (!abrindo) {
-            acoes.style.opacity = '0';
-            acoes.style.pointerEvents = 'none';
-            conteudo.style.marginTop = '0';
-        }
-        else {
-            acoes.style.opacity = '1';
-            acoes.style.pointerEvents = 'auto';
-            conteudo.style.marginTop = '29vh';
-        }
+        acoes.style.display = 'flex'
+        conteudo.style.transform = 'translate(0, -29vh)'
+        requestAnimationFrame(() => {
+            acoes.style.opacity = '1'
+            conteudo.style.transition = 'transform 300ms ease-in-out'
+            conteudo.style.transform = 'translate(0)'
+        })
     })
+    aberto = true
+    setOpcoes(aberto)
+}
 
-    setOpcoes(abrindo);
-};
+const fechaAjustes = (setOpcoes?: Function) => {
+    const acoes = document.getElementById('acoes');
+    const conteudo = document.getElementById('conteudo');
+    if (!acoes || !conteudo || !setOpcoes)
+        return;
 
-const clique = (controle?: Function, setar?: Function) => {
-    if (controle) {
-        controle(!aberto, setar); 
-        aberto = !aberto;
-    }
+    window.scrollTo(0, 0)
+    acoes.style.opacity = '0'
+    conteudo.style.transition = 'transform 300ms ease-in-out'
+    conteudo.style.transform = 'translate(0, -29vh)'
+    setTimeout(() => {
+        requestAnimationFrame(() => {
+            acoes.style.display = 'none'
+            conteudo.style.transition = 'none'
+            conteudo.style.transform = 'translate(0)'
+        })
+        aberto = false
+        setOpcoes(aberto)
+    }, 300);
 }
 
 const useScrollDirection = (nome: String) => {
@@ -99,13 +110,13 @@ export default function Cabecalho({nome, setOpcoes}: Nome) {
 
                     <PageTitle>{nome}</PageTitle>
 
-                    <DivAjustes>
-                        <IconeAjustes style={{display: `${nome === 'Cardápio' ? '' : 'none'}`}}
-                        src={aberto ? Close : Ajustes} 
-                        alt={aberto ? 'Ícone para fechar ajustes' : 'Ícone para abrir ajustes'} 
-                        onClick={() => clique(fadeAjustes, setOpcoes)}/>
-                    </DivAjustes>
-                </CabecaDiv>}
+                <DivAjustes>
+                    <IconeAjustes style={{display: `${nome === 'Cardápio' ? '' : 'none'}`}}
+                    src={aberto ? Close : Ajustes} 
+                    alt={aberto ? 'Ícone para fechar ajustes' : 'Ícone para abrir ajustes'} 
+                    onClick={() => aberto ? fechaAjustes(setOpcoes) : abreAjustes(setOpcoes)}/>
+                </DivAjustes>
+            </CabecaDiv>}
         </PlaceHolderCabecalho>
     );
 }

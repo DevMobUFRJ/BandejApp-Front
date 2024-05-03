@@ -76,10 +76,10 @@ export default function SideBarMobile({pendingNotification, mostrarPopup, rotaAt
 
             <InstitutoDiv>
                 <img src={LogoUFRJ} style={{width: '35%'}}
-                alt="Logo do Institudo de Computação da UFRJ."/>
-                <Linha/>
-                <img src={LogoDevmob} style={{width: '22%', padding: '0 6.5% 0 6.5%'}}
                 alt="Logo da Universidade Federal do Rio de Janeiro."/>
+                <Linha/>
+                <img src={LogoIC} style={{width: '35%'}}
+                alt="Logo do Instituto de Computação da UFRJ."/>
             </InstitutoDiv>
 
             <FecharDiv onClick={fecharSideBar} >

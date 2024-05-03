@@ -41,7 +41,7 @@ export default function SideBar() {
     const icones = [Home, Comun, Aval, Info, Fale];
     const laranjar = 'invert(48%) sepia(90%) saturate(1570%)' +
                     'hue-rotate(352deg) brightness(98%) contrast(102%)';
-    const versao = '1.0.3';
+    const versao = '1.0.4';
 
     return (
         (window.innerWidth/window.innerHeight) <= 1 ?
