@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
-import { ComunicadoDiv, Card, Container, CardMensagem, CardData, 
-        TextMensagem, TextData, MensagensNaoLidas, DataRelativa, 
-        BalaoSemMensagens, IconeSemMensagens, TextoSemMensagens, 
-        SideIcon, CardTop } from "./style";
+import { useEffect, useState, useContext } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-import Load from "../../Components/Load";
-import 'react-toastify/dist/ReactToastify.css';
-import Cabecalho from "../../Components/Cabecalho";
 import { Formatacao } from "../../Functions/Formatacao";
-import { useContext } from "react";
 import { NotificationContext } from "../../Contexts/PendingNotificationContext";
-import DownPop from "../../Components/PopUpIOS";
-import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
+
+import { ComunicadoDiv, Card, Container, CardMensagem, CardData, TextMensagem,
+TextData, MensagensNaoLidas, DataRelativa, BalaoSemMensagens, IconeSemMensagens,
+TextoSemMensagens, SideIcon, CardTop } from "./style";
+
+import 'react-toastify/dist/ReactToastify.css';
+import Load from "../../Components/Load";
+import Cabecalho from "../../Components/Cabecalho";
 import SemMsg from '../../Assets/Comunicados/SemMsg.svg'
     
 type aviso = {
@@ -28,8 +26,6 @@ export default function Comunicados() {
     const [loading, setLoading] = useState(true);
     const { pendingNotification, setPendingNotification } = useContext(NotificationContext);
     const [quantidadeNaoLidas, setQuantidadeNaoLidas] = useState(0)
-
-    const { showInstallMessage } = useContext(InstallMessageContext);
 
     const verificaPrecedenciaData = (data: String) => {
         let dataArmazenadaString = localStorage.getItem("bandejapp:ultimoAviso");
@@ -61,7 +57,7 @@ export default function Comunicados() {
                 {
                     aviso.pending = verificaPrecedenciaData(aviso.data)
                     if(aviso.pending){
-                        qtd++; 
+                        qtd++;
                     }
                 }
                 setQuantidadeNaoLidas(qtd);
@@ -139,13 +135,8 @@ export default function Comunicados() {
                                 </Card>
                             )})}
                     </Container>
-                    {
-                        showInstallMessage &&
-                        <DownPop/>
-                    }
                 </>
             }
-            
         </ComunicadoDiv>
     );
 }

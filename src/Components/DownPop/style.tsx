@@ -2,14 +2,18 @@ import styled from "styled-components";
 import { global } from "../../globalStyle";
 
 export const PopupDiv = styled.div `
-    display: flex;
+    display: none;
     width: 90%;
+
     position: fixed;
-    bottom: 0;
-    margin-bottom: 10px;
+    bottom: 10px;
+    left: 5%;
+    z-index: 2;
+
     border-radius: 3.5vw;
     background: ${global.colors.laranja};
     font-family: ${global.fonts.nunito};
+
     &:after {
         content: "";
         position: absolute;

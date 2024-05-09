@@ -1,15 +1,11 @@
-import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
-import { useContext } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-
-import Cabecalho from "../../Components/Cabecalho";
-
 import { Balao, BalaoBanner, BalaoDescription, BalaoInfo, BalaoTitle,
     FaleDiv, InfoLink, LinkIcon, LinkName, Links } from "./style";
     
-import DownPop from "../../Components/PopUpIOS";
+import { ToastContainer, toast } from 'react-toastify';
 import copy from 'copy-to-clipboard';
 
+import Cabecalho from "../../Components/Cabecalho";
+    
 import Copy from '../../Assets/FaleConosco/copiar.svg';
 import Check from '../../Assets/FaleConosco/check.svg';
 import Redirect from '../../Assets/FaleConosco/redirect.svg';
@@ -22,7 +18,6 @@ type copiado = {
     ativo: boolean;
     timeout: NodeJS.Timeout;
 }
-
 
 type Banner = {
     imagem: string;
@@ -38,7 +33,6 @@ type Banner = {
 }
 
 export default function FaleConosco() {
-    const { showInstallMessage } = useContext(InstallMessageContext);
 
     const Baloes: Array<Banner> = [
         {
@@ -130,7 +124,6 @@ export default function FaleConosco() {
                     </Balao>
                 )
             }
-            { showInstallMessage && <DownPop/> }
         </FaleDiv>
     );
 }

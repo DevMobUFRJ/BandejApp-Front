@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { ICardapioProps, ISemana } from "../../Types/storage";
 import { ToastContainer, toast } from 'react-toastify';
-import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
-import { CardapioDiv, Sombra, ActionsDiv, 
-        DropHeader, AvisoAtt, Conteudo} from "./style";
-    
-import { useHistory } from "react-router-dom";
+
+import { CardapioDiv, Sombra, ActionsDiv, DropHeader, AvisoAtt, Conteudo} from "./style";
 
 import NavBar from "../../Components/Navbar";
 import Horario from "../../Components/Horario";
 import DropDown from "../../Components/DropDown";
 import Dia from "../../Components/Dia";
-import DownPop from "../../Components/PopUpIOS";
 import Load from "../../Components/Load";
 import FontSize from "../../Functions/Cardapio/FontSize";
 import Cabecalho from "../../Components/Cabecalho";
@@ -29,7 +26,6 @@ const opcoesRestaurante = ['Central, CT e Letras', 'IFCS e Praia Vermelha',
 export default function Cardapio() {
     const history = useHistory();
 
-
     const [cardapio, setCardapio] = useState<ICardapioProps>();
 
     const [dia, tggDia] = useState(0);
@@ -38,8 +34,6 @@ export default function Cardapio() {
 
     const [opcoes, setOpcoes] = useState(true);
     const [loading, setLoading] = useState(true);
-
-    const { showInstallMessage } = useContext(InstallMessageContext);
     
     function selecionaRU(restaurante : string){
         localStorage.setItem("bandejapp:ruDefault", restaurante);
@@ -56,7 +50,7 @@ export default function Cardapio() {
             tentativas++;
             try {
                 const data = await fetch(`${process.env.REACT_APP_CARDAPIO_API_URL}`) 
-                let post = await data.json(); 
+                let post = await data.json();
                 if(JSON.stringify(post) === "{}"){
                     throw new Error("ObjetoNulo");
                 }
@@ -95,7 +89,7 @@ export default function Cardapio() {
                 {position: toast.POSITION.BOTTOM_CENTER}
             )
         }        
-    }, []);
+    }, [history]);
 
     FontSize();
 
@@ -199,13 +193,10 @@ export default function Cardapio() {
                     <Dia
                     hora={hora}
                     cardapio={makePath(dia)}
+                    ru={localStorage.getItem("bandejapp:ruDefault")}
                     />
                     <AvisoAtt>Atualizado em: {`${getAtt(ruAtual + '')}`}</AvisoAtt>
                 </Conteudo>
-                {
-                    showInstallMessage &&
-                    <DownPop/>
-                }
             </>
             }
         </CardapioDiv>

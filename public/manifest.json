@@ -13,6 +13,8 @@
     "short_name": "BandejApp",
     "description": "Aplicação Oficial do Restaurante Universitário",
 
+    "gcm_sender_id": "1047645357942",
+
     "icons": [
         {
             "src": "./icons/maskable_icon_x48.png",

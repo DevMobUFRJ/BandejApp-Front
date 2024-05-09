@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { PopupContext } from "../../Contexts/PopupContext";
 
 import { BackImg, ButtonDiv, CurrentDiv,
     CurrentPage, InitialPage, PageDescription,
@@ -14,14 +15,11 @@ import TempNotificacao from "../../Assets/Tutorial/TempNotificacao.svg"
 import LogoImg from '../../Assets/Tutorial/Logo.svg';
 import BackgroundRu from '../../Assets/Tutorial/BgRu.svg';
 
-import PopUp from "../../Components/PopUp";
-import { PopupContext } from "../../Contexts/PopupContext";
-import { PopTexto } from "../../Components/PopUp/style";
 
 
 export default function Tutorial() {
     const history = useHistory();
-    const { mostrarPopup } = useContext(PopupContext);
+    const { mostrarPopup, PopUp, Components:{PopTexto} } = useContext(PopupContext);
 
     const [page, tggPage] = useState(0);
     const [inicio, tggInicio] = useState(0);
@@ -70,9 +68,7 @@ export default function Tutorial() {
         pageIndex[page + direcao].classList.add('currentPage');
     }
 
-    useEffect(() => {
-        mostrarPopup('agradecimento');
-    }, [])
+    window.onload = () => mostrarPopup('agradecimento'); 
 
     return(
         <TutDiv>

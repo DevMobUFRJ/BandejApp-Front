@@ -49,7 +49,7 @@ export default function DropDown(
         
         if (containerSelecionado && elementoPrimeiraOpcao && seta)
         containerSelecionado.insertBefore(elementoPrimeiraOpcao, seta);
-    }, [])
+    }, [opcaoInicial])
     
     
     const arruma = () => {
