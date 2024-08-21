@@ -1,8 +1,11 @@
 import ReactDOM from "react-dom";
 import { useContext, useEffect } from "react";
 
-import { PopButton, PopButtonDiv, PopDiv, PopTitulo } from "./style";
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
+
 import { PopupContext } from "../../Contexts/PopupContext";
+import ImportStyle from "../../Functions/ImportStyle";
 
 type PopInfo = {
     popID: string;
@@ -18,7 +21,8 @@ export default function PopUp(
 ) {
     const popOuter = document.getElementById('popOuter');
     const { popupAtual } = useContext(PopupContext);
-    
+    const { PopButton, PopButtonDiv, PopDiv, PopTitulo } = ImportStyle(styleMobile, styleWeb);
+
     useEffect(() => {
         const popOuter = document.getElementById('popOuter');
         const popup = document.getElementById('popup');

@@ -1,22 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { BackImg, ButtonDiv, CurrentDiv,
-    CurrentPage, InitialPage, PageDescription,
-    PageTitle, PrevNext, StartSkip, Template,
-    TemplateDiv, TutDiv, Logo, LogoDiv, StartDiv } from "./style";
-
-import Background from '../../Assets/Tutorial/BgInicial.svg';
-import TempAvaliacao from "../../Assets/Tutorial/TempAvaliacao.svg";
-import TempCardapio from "../../Assets/Tutorial/TempCardapio.svg";
-import TempDownload from "../../Assets/Tutorial/TempDownload.svg";
-import TempNotificacao from "../../Assets/Tutorial/TempNotificacao.svg"
-import LogoImg from '../../Assets/Tutorial/Logo.svg';
-import BackgroundRu from '../../Assets/Tutorial/BgRu.svg';
-
-import PopUp from "../../Components/PopUp";
 import { PopupContext } from "../../Contexts/PopupContext";
-import { PopTexto } from "../../Components/PopUp/style";
+
+import TutorialMobile from "./mobile";
+import TutorialWeb from "./web";
 
 
 export default function Tutorial() {
@@ -27,25 +15,25 @@ export default function Tutorial() {
     const [inicio, tggInicio] = useState(0);
 
     const titulos = ['Instale o App', 'Acesse os avisos',
-                    'Confira o Cardápio', 'Faça Avaliações'];
+        'Confira o Cardápio', 'Faça Avaliações'];
 
     const descricoes = ['e acesse o cardápio até quando estiver sem conexão com a internet.',
-                        'e fique por dentro do funcionamento dos RU\'s e de tudo que acontece.',
-                        'e saiba o que será servido durante toda a semana no almoço e jantar.',
-                        'fornecendo o feedback necessário para que o RU possa ficar cada vez melhor.']
+        'e fique por dentro do funcionamento dos RU\'s e de tudo que acontece.',
+        'e saiba o que será servido durante toda a semana no almoço e jantar.',
+        'fornecendo o feedback necessário para que o RU possa ficar cada vez melhor.']
 
-    
-    const tempHandler = (target: string) => {        
-        if(target.includes('prevButton')) {
-            if(page <= 0) 
+
+    const tempHandler = (target: string) => {
+        if (target.includes('prevButton')) {
+            if (page <= 0)
                 tggInicio(0);
-            else 
+            else
                 passarPara('prevTemplate');
         }
         else {
-            if(page >= 3) 
-                history.push('/Restaurante'); 
-            else 
+            if (page >= 3)
+                history.push('/Restaurante');
+            else
                 passarPara('nextTemplate');
         }
     }
@@ -53,90 +41,45 @@ export default function Tutorial() {
     const passarPara = (praOnde: string) => {
         const contrario = praOnde === 'nextTemplate' ? 'prevTemplate' : 'nextTemplate';
         const direcao = praOnde === 'nextTemplate' ? 1 : -1;
-        
+
         const pageIndex = document.querySelectorAll('#page');
         const currentPage = document.querySelector('.currentPage');
 
         const currentTemp = document.querySelector('.currentTemplate');
-        const nextTemp = document.querySelector(`.${praOnde}`);
+        const nextTemps = document.querySelectorAll(`.${praOnde}`);
+        const nextTemp = nextTemps[direcao === 1 ? 0 : nextTemps.length -1];
 
         tggPage(page + direcao);
 
         currentTemp?.classList.replace('currentTemplate', contrario);
         nextTemp?.classList.replace(praOnde, 'currentTemplate');
 
-        if(currentPage) 
+        if (currentPage)
             currentPage.classList.toggle('currentPage');
         pageIndex[page + direcao].classList.add('currentPage');
     }
 
-    useEffect(() => {
-        mostrarPopup('agradecimento');
-    }, [])
-
-    return(
-        <TutDiv>
-            <PopUp popID='agradecimento' titulo="Obrigado! 🥳"
-                opcoes={['Fechar']} tiposOpcoes={[0]}
-                funcoesOpcoes={[mostrarPopup]}
-                componente={
-                    <PopTexto>
-                        Estamos muito felizes em anunciar o lançamento oficial da primeira versão do BandejApp. 
-                        Esperamos que aproveitem e aguardamos ansiosamente seus feedbacks. 🎉🎉
-                    </PopTexto>
-                }
+    return (
+        (window.innerWidth/window.innerHeight) <= 1 ?
+            <TutorialMobile
+                history={history}
+                mostrarPopup={mostrarPopup}
+                page={page}
+                inicio={inicio}
+                titulos={titulos}
+                descricoes={descricoes}
+                tempHandler={tempHandler}
+                tggInicio={tggInicio}
+            />:
+            <TutorialWeb
+                history={history}
+                mostrarPopup={mostrarPopup}
+                page={page}
+                inicio={inicio}
+                titulos={titulos}
+                descricoes={descricoes}
+                tempHandler={tempHandler}
+                tggInicio={tggInicio}
             />
-
-            <InitialPage style={{display: `${inicio?'none':'flex'}`}}>
-                <BackImg src={BackgroundRu} alt='Imagem de fundo com as cubas do RU em destaque'/>
-
-                <LogoDiv>
-                    <Logo src={LogoImg} alt='Logo do aplicativo BandejApp'/>
-                </LogoDiv>
-
-                <PageDescription>
-                    Tenha o cardápio do<br/>bandejão onde e quando<br/>você precisar
-                </PageDescription>
-
-                <StartDiv>
-                    <StartSkip onClick={() => tggInicio(1)}>Começar</StartSkip>
-                    <StartSkip className="skip" onClick={() => history.push('/Restaurante')}>Pular introdução</StartSkip>
-                </StartDiv>
-            </InitialPage>
-
-            <div style={{display: `${inicio?'':'none'}`}}>
-                <BackImg src={Background} alt='Imagem de onda laranja ao fundo'/>
-                
-                <CurrentDiv>
-                    <CurrentPage id="page" className="currentPage"/>
-                    <CurrentPage id="page"/>
-                    <CurrentPage id="page"/>
-                    <CurrentPage id="page"/>
-                </CurrentDiv>
-
-                <TemplateDiv>
-                    <Template id="template" className="currentTemplate" src={TempDownload}
-                    alt='Imagem ilustrativa do aplicativo'/>
-                    <Template id="template" className="nextTemplate" src={TempNotificacao}
-                    alt='Imagem ilustrativa do aplicativo'/>
-                    <Template id="template" className="nextTemplate" src={TempCardapio}
-                    alt='Imagem ilustrativa do aplicativo'/>
-                    <Template id="template" className="nextTemplate" src={TempAvaliacao}
-                    alt='Imagem ilustrativa do aplicativo'/>
-                </TemplateDiv>
-
-                <PageTitle>{`${titulos[page]}`}</PageTitle>
-                <PageDescription>{`${descricoes[page]}`}</PageDescription>
-
-                <ButtonDiv>
-                    <PrevNext className="prevButton"
-                    onClick={(e) => {tempHandler(e.currentTarget.className);}}>Voltar</PrevNext>
-
-                    <PrevNext className="nextButton"
-                    onClick={(e) => {tempHandler(e.currentTarget.className);}}
-                    >{page===3? 'Ver Cardápio':'Próximo'}</PrevNext>
-                </ButtonDiv>
-            </div>
-        </TutDiv> 
     );
 };

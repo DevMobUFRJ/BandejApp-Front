@@ -3,19 +3,22 @@ import { global } from "../../globalStyle";
 
 export const NavDiv = styled.div `
     display: flex;
+    justify-content: space-between;
+    // gap: 12px;
 
     margin: 2vh 0 0 0;
-    padding: 0 4.5vw;
-    width: 92vw;
+    // padding: 0 5%;
+    width: 92%;
 
-    overflow-x: scroll;
-    ::-webkit-scrollbar {
-        display: none;
-    }
+    // overflow-x: scroll;
+    // ::-webkit-scrollbar {
+    //     display: none;
+    // }
     .diaSelect {
         background-color: ${global.colors.laranja} !important;
         color: ${global.colors.branco};
     }
+
 `;
 
 /*-----------------------------------------------------------*/
@@ -23,22 +26,29 @@ export const NavDiv = styled.div `
 export const NavButton = styled.button `
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
 
-    width: 24.1vw;
-    height: 11.5vh;
+    min-width: 9.84375vw;
+    height: 7.1875vw;
     
     align-items: center;
+    justify-content: center;
 
     // Tive q escurecer o cinza pq n era perceptivel em boa parte dos monitores de computador. cinza = branco
-    // background: ${global.colors.cinzaOpaco(.07)};
-    background: ${global.colors.cinzaOpaco(.2)};
+    background: ${global.colors.branco};
+
+    box-shadow: 0px 2px 10px #00000040;
+    // box-shadow: 0px 2px 4px #00000014;
     
     outline: none;
     border: none;
     border-radius: 16px;
 
-    transition: transform 0.5s ease;  
+    transition: transform 0.5s ease;
+    padding: 1vw 0;
+
+    @media (max-width: 1550px) {
+        padding: .5vw 0;
+    }
 `;
 
 /*-----------------------------------------------------------*/
@@ -49,9 +59,13 @@ export const DiaSemana = styled.p `
 
     font-family: ${global.fonts.quickSand};
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1.25vw;
 
     color: ${global.colors.cinza};
+
+    @media (max-width: 1550px) {
+        font-size: 1.4vw;
+    }
 `;
 
 export const DiaMes = styled.p `
@@ -59,9 +73,13 @@ export const DiaMes = styled.p `
 
     font-family: ${global.fonts.quickSand};
     font-weight: 700;
-    font-size: 12px;
+    font-size: .75vw;
 
     color: ${global.colors.cinza};
+
+    @media (max-width: 1550px) {
+        font-size: 1vw;
+    }
 `;
 
 export const DiaRelativo = styled.p `
@@ -71,7 +89,11 @@ export const DiaRelativo = styled.p `
 
     font-family: ${global.fonts.quickSand};
     font-weight: 700;
-    font-size: 12px;
+    font-size: .75vw;
 
     color: ${global.colors.cinza};
+
+    @media (max-width: 1550px) {
+        font-size: 1vw;
+    }
 `;

@@ -1,4 +1,6 @@
-import { PopSection, PopLink, PopSubtitle } from "./style";
+import ImportStyle from "../../Functions/ImportStyle";
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
 
 type credito = {
     versao: string;
@@ -26,6 +28,7 @@ const creditos: Array<credito> = [
 ]
 
 export default function Creditos() {
+    const { PopSection, PopLink, PopSubtitle } = ImportStyle(styleMobile, styleWeb);
     return (
         <div>
             {
@@ -40,7 +43,7 @@ export default function Creditos() {
                             <PopSubtitle>DESENVOLVEDORES</PopSubtitle>
                             {credito.devs.map((dev, index) => 
                                 <PopLink key={index} href={dev[1]}
-                                onClick={(e) => { if(dev[1] === '#') e.preventDefault(); }}>
+                                onClick={(e: Event) => { if(dev[1] === '#') e.preventDefault(); }}>
                                     {dev[0]}
                                     <br/>
                                 </PopLink>
@@ -51,7 +54,7 @@ export default function Creditos() {
                             <PopSubtitle>DESIGNERS</PopSubtitle>
                             {credito.des.map((des, index) => 
                                 <PopLink key={index} href={des[1]}
-                                onClick={(e) => { if(des[1] === '#') e.preventDefault(); }}>
+                                onClick={(e: Event) => { if(des[1] === '#') e.preventDefault(); }}>
                                     {des[0]}
                                     <br/>
                                 </PopLink>

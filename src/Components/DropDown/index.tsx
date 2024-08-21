@@ -1,10 +1,11 @@
-import { DropDiv, Opcoes, DropItem, 
-    IconeEsquerda, Selecionado, DropArrow } from './style';
+import * as styleMobile from './style';
+import * as styleWeb from './styleWeb';
     
 import arrowDown from '../../Assets/Cardapio/ArrowDown.svg';
 import Pin from '../../Assets/Cardapio/Pin.svg';
 import Rest from '../../Assets/Informacoes/Ajustes.svg'
 import { useEffect } from 'react';
+import ImportStyle from '../../Functions/ImportStyle';
 
 type DropDownProps = {
     opcaoInicial: string, // Valor que o useState está definido quando o componente é renderizado
@@ -13,7 +14,8 @@ type DropDownProps = {
                             i-ésima posição desse array vai ativar o estado na i-ésima posição 
                             do array anterior. Por isso, obviamente, os arrays devem ter o mesmo tamanho */
     tela: string, // Quem é o pai (Pra definir qual ícone fica à esquerda, no switch ali embaixo)
-    alterarState: Function
+    alterarState: Function,
+    height?: string
 };
 
 const escolheIcone = (lugar: string) => {
@@ -35,7 +37,7 @@ const tamanho = (lugar: string) => {
 };
 
 export default function DropDown(
-    {opcaoInicial, valoresState, valoresOpcoes,tela, alterarState}: DropDownProps
+    {opcaoInicial, valoresState, valoresOpcoes, tela, alterarState, height}: DropDownProps
     ) {
     
     useEffect(() => {
@@ -81,7 +83,7 @@ export default function DropDown(
                 containerOpcoes.style.opacity = '1';
                 containerOpcoes.style.transform = 'translateY(0vh)';
                 containerOpcoes.style.pointerEvents = 'auto';
-                containerOpcoes.style.height = `${(valoresState.length - 1) * 7.5}vh`;
+                containerOpcoes.style.height = window.innerWidth/window.innerHeight <= 1 ? `${(valoresState.length - 1) * 7.5}vh` : `${(valoresState.length - 1) * 4.6875}vw`;
             }
         })
     };
@@ -141,11 +143,15 @@ export default function DropDown(
 
     }
 
+    const { DropDiv, Opcoes, DropItem, 
+        IconeEsquerda, Selecionado, DropArrow } = ImportStyle(styleMobile, styleWeb);
+
     return (
-        <DropDiv style={{width: `calc(${tamanho(tela)} + 4px)`}} 
-                id='dropdown' onClick={OpenDrop}>
-            <Selecionado style={{width: `${tamanho(tela)}`}} id='selecionado' >
-                <IconeEsquerda src={escolheIcone(tela)} style={{width: `${tela === 'cardapio'? '':'5vw'}` }}
+        <DropDiv id='dropdown' onClick={OpenDrop}>
+            <Selecionado id='selecionado' style={{height}}>
+                <IconeEsquerda src={escolheIcone(tela)} 
+                    style={{width: `${tela === 'cardapio'? '': window.innerWidth/window.innerHeight <= 1 ? '5vw' : '2vw' }` }
+                }
                 alt='Ícone para selecionar restaurante'/>
                 <DropArrow id='seta' src={arrowDown} 
                 alt='Ícone para selecionar restaurante'/>
@@ -153,9 +159,8 @@ export default function DropDown(
             <Opcoes id='opcoes'>
                 {
                     valoresState.map((estado, indice) => 
-                        <DropItem type='button' 
+                        <DropItem type='button' style={{height}}
                         key={indice}
-                        style={{width: `${tamanho(tela)}`}}
                         id={estado}>{valoresOpcoes[indice]}
                         </DropItem>
                     )

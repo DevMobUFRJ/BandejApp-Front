@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ComunicadoDiv, Card, Container, CardMensagem, CardData, 
-        TextMensagem, TextData, MensagensNaoLidas, DataRelativa, 
-        BalaoSemMensagens, IconeSemMensagens, TextoSemMensagens, 
-        SideIcon, CardTop } from "./style";
+
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
+
 import { ToastContainer, toast } from 'react-toastify';
 import Load from "../../Components/Load";
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,9 @@ import { NotificationContext } from "../../Contexts/PendingNotificationContext";
 import DownPop from "../../Components/PopUpIOS";
 import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
 import SemMsg from '../../Assets/Comunicados/SemMsg.svg'
+
+import Footer from "../../Components/Footer";
+import ImportStyle from "../../Functions/ImportStyle";
     
 type aviso = {
     comunicado: String,
@@ -21,6 +24,21 @@ type aviso = {
 };
 
 let consultando = false;
+
+const avisosTeste = [
+    {   comunicado: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        data: '24/01/2024 12:26',
+        pending: true },
+    {   comunicado: 'Lorem ipsum dolor sit amet elit dolor consectetur adispicing elit. Lorem ipsum dolor sit amet elit dolor consectetur adispicing elit.',
+        data: '23/01/2024 12:26',
+        pending: true },
+    {   comunicado: 'Lorem ipsum dolor sit amet elit dolor consectetur adispicing elit. Lorem ipsum dolor sit amet elit dolor consectetur adispicing elit. Lorem ipsum dolor sit amet elit dolor consectetur adispicing elit. Lorem ipsum dolor sit amet elit dolor consectetur adispicing elit.',
+        data: '22/01/2024 12:26',
+        pending: false },
+    {   comunicado: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+        data: '22/01/2024 12:26',
+        pending: false }
+];
 
 export default function Comunicados() {
 
@@ -90,7 +108,10 @@ export default function Comunicados() {
         }
     }, []);
 
-    
+    const { ComunicadoDiv, Card, Container, CardMensagem, CardData, 
+        TextMensagem, TextData, MensagensNaoLidas, DataRelativa, 
+        BalaoSemMensagens, IconeSemMensagens, TextoSemMensagens, 
+        SideIcon, CardTop } = ImportStyle(styleMobile, styleWeb);
 
     return (
         <ComunicadoDiv id="ComunicadoPage">
@@ -112,13 +133,13 @@ export default function Comunicados() {
                             style={{display: comentarios.length ? '' : 'none'}}>{`Marcar tudo como lido (${quantidadeNaoLidas})`}
                         </MensagensNaoLidas>
                     }
-                    <Container>
+                    <Container style={comentarios.length === 0 && window.innerWidth/window.innerHeight > 1 ? {display: 'none'} : {}}>
                         {
                         comentarios.map((comentario, index) => {
                             return (
                                 <Card 
                                     key={index}
-                                    style={{borderRadius: `${Formatacao.bordaRedonda(index, comentarios.length)}`}}
+                                    style={{borderRadius: window.innerWidth/window.innerHeight <= 1 ? `${Formatacao.bordaRedonda(index, comentarios.length)}` : '16px'}}
                                     new={comentario.pending && pendingNotification}
                                 >
                                     <CardData>
@@ -135,7 +156,7 @@ export default function Comunicados() {
                                         </TextData>
                                     </CardData>
                                     
-                                    <CardMensagem><TextMensagem>{comentario.comunicado}</TextMensagem></CardMensagem>
+                                    <CardMensagem><TextMensagem dangerouslySetInnerHTML={{ __html: comentario.comunicado.replace(/\n/g, '<br>') }}></TextMensagem></CardMensagem>
                                 </Card>
                             )})}
                     </Container>
@@ -145,7 +166,7 @@ export default function Comunicados() {
                     }
                 </>
             }
-            
+            <Footer/>
         </ComunicadoDiv>
     );
 }

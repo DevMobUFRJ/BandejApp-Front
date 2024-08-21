@@ -7,23 +7,32 @@ export const InformDiv = styled.div `
     min-height: 100vh;
     
     align-items: center;
+    justify-content: center; 
 
     background: ${global.colors.fundo};
 `;
 
 
-export const SelecionaInfoDiv = styled.div `
+export const SelecionaInfoDivBlock = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    margin-top: 2vh;
-    height: 11.5vh;
     width: 91.1vw;
-    
+    height: 12vh;
+
+    margin-top: 2vh;
+
     border-radius: 16px;
     background: ${global.colors.branco};
 `;
+
+export const SelecionaInfoDiv = styled.div `
+    display: block;
+    width: 91.1%;
+    height: 8vh;    
+ `;
 
 /*----------------------------------------------------------------------------*/
 

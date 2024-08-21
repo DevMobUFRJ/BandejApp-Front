@@ -1,8 +1,11 @@
 import { RatingDiv, StarIcon } from "./style";
 
-type starInfo = { NotaToParent: Function; }
+type starInfo = { 
+    NotaToParent: Function; 
+    fontSize?: string;
+}
 
-export default function Nota({NotaToParent}: starInfo) {
+export default function Nota({NotaToParent, fontSize = '17vw'}: starInfo) {
 
     const SetNota = (evento: Event) => { // Adaptado do JSfiddle -> link no style
         evento.stopPropagation();
@@ -20,12 +23,12 @@ export default function Nota({NotaToParent}: starInfo) {
 
     return (
         <RatingDiv id="classificacao" onClick={e => SetNota(e.nativeEvent)}>
-            <StarIcon style={{display: 'none'}} value='0' className="notaSelecionada"/>
-            <StarIcon value='1' onClick={e => NotaToParent(e.currentTarget.value)}/>
-            <StarIcon value='2' onClick={e => NotaToParent(e.currentTarget.value)}/>
-            <StarIcon value='3' onClick={e => NotaToParent(e.currentTarget.value)}/>
-            <StarIcon value='4' onClick={e => NotaToParent(e.currentTarget.value)}/>
-            <StarIcon value='5' onClick={e => NotaToParent(e.currentTarget.value)}/>
+            <StarIcon style={{display: 'none', fontSize}} value='0' className="notaSelecionada"/>
+            <StarIcon style={{fontSize}} value='1' onClick={e => NotaToParent(e.currentTarget.value)}/>
+            <StarIcon style={{fontSize}} value='2' onClick={e => NotaToParent(e.currentTarget.value)}/>
+            <StarIcon style={{fontSize}} value='3' onClick={e => NotaToParent(e.currentTarget.value)}/>
+            <StarIcon style={{fontSize}} value='4' onClick={e => NotaToParent(e.currentTarget.value)}/>
+            <StarIcon style={{fontSize}} value='5' onClick={e => NotaToParent(e.currentTarget.value)}/>
         </RatingDiv>
     );
 }

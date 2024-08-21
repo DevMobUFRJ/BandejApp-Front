@@ -2,6 +2,8 @@ import { useEffect } from "react";
 
 export default function FontSize() {
     useEffect(() => {
+        if(window.innerWidth/window.innerHeight > 1) return;
+
         const cardapioItems = document.querySelectorAll('#prato');
 
         cardapioItems.forEach((item) => {
