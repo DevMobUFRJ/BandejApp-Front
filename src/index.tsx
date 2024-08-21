@@ -27,20 +27,31 @@ function App() {
 
     useEffect(() => {}, [proporcao]);
 
-    if((window.innerWidth/window.innerHeight) <= 1) {
-        return (
-            <React.StrictMode>
-                    <PopupProvider>
-                        <InstallMessageProvider>
-                            <NotificationProvider>
-                                <Router/>
-                            </NotificationProvider>
-                        </InstallMessageProvider>
-                    </PopupProvider>
-            </React.StrictMode>
-        );
-    }
-    else return (<Paisagem/>);
+    return (
+        <React.StrictMode>
+                <PopupProvider>
+                    <InstallMessageProvider>
+                        <NotificationProvider>
+                            <Router/>
+                        </NotificationProvider>
+                    </InstallMessageProvider>
+                </PopupProvider>
+        </React.StrictMode>
+    );
+    // if((window.innerWidth/window.innerHeight) <= 1) {
+    //     return (
+    //         <React.StrictMode>
+    //                 <PopupProvider>
+    //                     <InstallMessageProvider>
+    //                         <NotificationProvider>
+    //                             <Router/>
+    //                         </NotificationProvider>
+    //                     </InstallMessageProvider>
+    //                 </PopupProvider>
+    //         </React.StrictMode>
+    //     );
+    // }
+    // else return (<Paisagem/>);
 };
 
 root.render(<App/>);

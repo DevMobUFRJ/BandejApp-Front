@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import { DiaMes, DiaSemana, DiaRelativo, NavButton, NavDiv } from "./style";
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
 import { Formatacao } from "../../Functions/Formatacao";
+import ImportStyle from "../../Functions/ImportStyle";
 
 type switchDia = { 
     tggDia: Function
@@ -58,12 +60,14 @@ export default function NavBar({tggDia, semana}: switchDia) {
             nav.scrollTo({left: (pos - 2) * passo, behavior: 'smooth'});
     }
 
+    const { DiaMes, DiaSemana, DiaRelativo, NavButton, NavDiv } = ImportStyle(styleMobile, styleWeb);
+
     return (
         <NavDiv id="nav">
             {
                 semana.map((stringDia, indice) => 
                     <NavButton key={indice} id={diasSemana[indice]} value={indice + 1}
-                    style={{marginLeft: indice === 0 ? '0' : '2.2vw'}}
+                    style={{marginLeft: indice === 0 || window.innerWidth/window.innerHeight > 1 ? '0' : '2.2vw'}}
                     onClick={seleciona}>
                         <DiaSemana id="diaSemana">{diasSemana[indice]}</DiaSemana>
                         <DiaMes id="diaSemana">

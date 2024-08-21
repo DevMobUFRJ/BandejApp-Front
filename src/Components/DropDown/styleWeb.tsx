@@ -18,30 +18,38 @@ export const DropDiv = styled.div `
 `;
 
 export const Selecionado = styled.div `
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    height: 7.5vh;
-    width: 95%;
+    align-items: center;
+    justify-content: center;
+    height: 4.6875vw;
+    width: 100%;
+
+    padding: 0 1.5vw;
     
     background: ${global.colors.branco};
     border: 2px solid ${global.colors.cinzaOpaco(0.24)};
     border-radius: 16px;
+
+    button {
+        padding-left: 1vw;
+    }
 `;
 
 export const IconeEsquerda = styled.img `
-    width: 3.88vw;
-    margin-left: 6.1vw;
+    width: 1.405vw;
 `;
 
 export const DropArrow = styled.img `
-    width: 3.33vw;
-    margin-right: 6.1vw;
+    width: 1.405vw;
 `;
 
 export const Opcoes = styled.div `
+    box-sizing: border-box;
     display: block;
     height: 0;
-    width: 95%;
+    width: 100%;
 
     z-index: 1;
 
@@ -65,11 +73,11 @@ export const DropItem = styled.button `
     align-items: center;
 
     width: 100%;
-    height: 7.5vh;
+    height: 4.6875vw;
 
     z-index: 1;
 
-    font-size: 16px;
+    font-size: 1.25vw;
     font-family: ${global.fonts.quickSand};
     font-weight: 700;
 

@@ -1,42 +1,18 @@
 import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
 import { useContext } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
-import Cabecalho from "../../Components/Cabecalho";
-
-import { Balao, BalaoBanner, BalaoDescription, BalaoInfo, BalaoTitle,
-    FaleDiv, InfoLink, LinkIcon, LinkName, Links } from "./style";
-    
-import DownPop from "../../Components/PopUpIOS";
 import copy from 'copy-to-clipboard';
 
 import Copy from '../../Assets/FaleConosco/copiar.svg';
 import Check from '../../Assets/FaleConosco/check.svg';
-import Redirect from '../../Assets/FaleConosco/redirect.svg';
 
 import DevMobBanner from '../../Assets/FaleConosco/devmobBanner.svg';
 import RUbanner from '../../Assets/FaleConosco/ruBanner.svg';
+import FaleConoscoMobile from "./indexMobile";
+import FaleConoscoWeb from "./indexWeb";
+import { Banner, copiado } from "./FaleConoscoTypes";
     
-type copiado = {
-    id: string;
-    ativo: boolean;
-    timeout: NodeJS.Timeout;
-}
-
-
-type Banner = {
-    imagem: string;
-    alt: string;
-    titulo: string;
-    descricao: string;
-    opcoes: Array<{
-        tipo: number; /* 0 -> Link | != 0 -> copiar */
-        nome: string; /* Se for texto para copiar, o nome DEVERIA ser o texto para copiar*/
-        linkOuId:  string;
-    }>;
-    filtro: string;
-}
-
 export default function FaleConosco() {
     const { showInstallMessage } = useContext(InstallMessageContext);
 
@@ -65,72 +41,38 @@ export default function FaleConosco() {
         }
     ];
 
-    const timers: copiado[] = [];
     const copiar = (id: string, link: string) => {
-        copy(link);
-        toast.success('Link copiado para a área de transferência', 
-        {position: toast.POSITION.BOTTOM_CENTER})
+      const timers: copiado[] = [];
+      copy(link);
+      toast.success('Link copiado para a área de transferência', 
+      {position: toast.POSITION.BOTTOM_CENTER})
 
-        const alvo = document.getElementById(id);
-        if (!alvo) 
-            return;
+      const alvo = document.getElementById(id);
+      if (!alvo) 
+          return;
 
-        const listado = timers.find((el) => el.id === id);
+      const listado = timers.find((el) => el.id === id);
 
-        alvo.setAttribute('src', Check);
-        if (!listado) {
-            const novoTimer = setTimeout(() => alvo.setAttribute('src', Copy), 2000)
-            timers.push({id: id, ativo: true, timeout: novoTimer});
-        }
-        else {
-            if (listado.ativo)
-                window.clearTimeout(listado.timeout);
+      alvo.setAttribute('src', Check);
+      if (!listado) {
+          const novoTimer = setTimeout(() => alvo.setAttribute('src', Copy), 2000)
+          timers.push({id: id, ativo: true, timeout: novoTimer});
+      }
+      else {
+          if (listado.ativo)
+              window.clearTimeout(listado.timeout);
 
-            listado.ativo = true;
-            listado.timeout = setTimeout(() => {
-                listado.ativo = false;
-                alvo.setAttribute('src', Copy)
-            }, 2000)
-        }
+          listado.ativo = true;
+          listado.timeout = setTimeout(() => {
+              listado.ativo = false;
+              alvo.setAttribute('src', Copy)
+          }, 2000)
+      }
     }
 
     return (
-        <FaleDiv>
-            <ToastContainer autoClose={2000}/>
-            <Cabecalho nome='Fale conosco'/>
-
-            {
-                Baloes.map( (banner, indice) => 
-                    <Balao key={indice}>
-                        <BalaoBanner src={banner.imagem} alt={banner.alt}/>
-
-                        <BalaoInfo>
-                            <BalaoTitle>{banner.titulo}</BalaoTitle>
-                            <BalaoDescription>{banner.descricao}</BalaoDescription>
-                            <Links>
-                                {banner.opcoes.map((opcao, index) => 
-                                    opcao.tipo === 0?
-                                    <InfoLink href={opcao.linkOuId} key={index}>
-                                        <LinkName>{opcao.nome}</LinkName>
-                                        <LinkIcon src={Redirect}
-                                        alt="Ícone de redirecionamento"
-                                        style={{filter: banner.filtro}}/>
-                                    </InfoLink>
-
-                                    :
-
-                                    <InfoLink onClick={() => copiar(opcao.linkOuId, opcao.nome)} key={index}>
-                                        <LinkName>{opcao.nome}</LinkName>
-                                        <LinkIcon src={Copy} alt="Ícone de copiar" id={opcao.linkOuId}
-                                        style={{filter: banner.filtro}}/>
-                                    </InfoLink>
-                                )}
-                            </Links>
-                        </BalaoInfo>
-                    </Balao>
-                )
-            }
-            { showInstallMessage && <DownPop/> }
-        </FaleDiv>
+      window.innerWidth/window.innerHeight <= 1 ?
+        <FaleConoscoMobile showInstallMessage={showInstallMessage} Baloes={Baloes} copiar={copiar}/>:
+        <FaleConoscoWeb showInstallMessage={showInstallMessage} Baloes={Baloes} copiar={copiar}/>
     );
 }

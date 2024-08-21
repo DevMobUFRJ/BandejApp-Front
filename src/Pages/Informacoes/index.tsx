@@ -4,8 +4,10 @@ import DownPop from "../../Components/PopUpIOS";
 import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
 import { useContext, useState } from "react";
 import { SelecionaInfoDiv, InfoArea, InfoBalao, InfoGrid, InfoSubtitle, InfoTitle, 
-        InfoUndertitle, InformDiv, InfoValor, BalaoInfo } from "./style";
+        InfoUndertitle, InformDiv, InfoValor, BalaoInfo, SelecionaInfoDivBlock } from "./styleMobile";
 import DropDown from "../../Components/DropDown";
+import InformacoesWeb from "./web";
+import InformacoesMobile from "./mobile";
 
 
 export default function Informacoes() {
@@ -53,70 +55,22 @@ export default function Informacoes() {
     }
 
     return (
-        <InformDiv>
-            <Cabecalho nome="Informações"/>
-            
-            <SelecionaInfoDiv>
-                <DropDown
-                opcaoInicial={ruSelecionado}
-                valoresState={values}
-                valoresOpcoes={options}
-                tela="info"
-                alterarState={setRU}/>
-            </SelecionaInfoDiv>
-
-            <BalaoInfo>
-                <InfoTitle>Horário de funcionamento</InfoTitle>
-
-                <InfoGrid>
-                    <InfoSubtitle>SEGUNDA A SEXTA</InfoSubtitle>
-                    <InfoArea>
-                        <InfoBalao>
-                            <InfoUndertitle>Almoço</InfoUndertitle>
-                            <InfoValor>{`${horarios(ruSelecionado)[0]}`}</InfoValor>
-                        </InfoBalao>
-                        <InfoBalao>
-                            <InfoUndertitle>Jantar</InfoUndertitle>
-                            <InfoValor>{`${horarios(ruSelecionado)[1]}`}</InfoValor>
-                        </InfoBalao>
-                    </InfoArea>
-                </InfoGrid>
-
-                <InfoGrid>
-                    <InfoSubtitle>FINAIS DE SEMANA E FERIADOS:</InfoSubtitle>
-                    <InfoArea>
-                        <InfoBalao>
-                            <InfoUndertitle>Almoço</InfoUndertitle>
-                            <InfoValor>{`${horarios(ruSelecionado)[2]}`}</InfoValor>
-                        </InfoBalao>
-                        <InfoBalao>
-                            <InfoUndertitle>Jantar</InfoUndertitle>
-                            <InfoValor>{`${horarios(ruSelecionado)[3]}`}</InfoValor>
-                        </InfoBalao>
-                    </InfoArea>
-                </InfoGrid>
-            </BalaoInfo>
-
-            <BalaoInfo>
-                <InfoTitle>Preços</InfoTitle>
-
-                <InfoGrid>
-                    <InfoArea>
-                        <InfoBalao>
-                            <InfoUndertitle>Alunos</InfoUndertitle>
-                            <InfoValor>R$ 2,00</InfoValor>
-                        </InfoBalao>
-                        <InfoBalao>
-                            <InfoUndertitle>Servidores</InfoUndertitle>
-                            <InfoValor>R$ {horarios(ruSelecionado)[4]}</InfoValor>
-                        </InfoBalao>
-                    </InfoArea>
-                </InfoGrid>
-            </BalaoInfo>
-            {
-                showInstallMessage &&
-                <DownPop/>
-            }
-        </InformDiv>
+        (window.innerWidth/window.innerHeight) <= 1 ?
+        <InformacoesMobile 
+            showInstallMessage={showInstallMessage}
+            options={options}
+            values={values}
+            ruSelecionado={ruSelecionado}
+            setRU={setRU}
+            horarios={horarios}
+        />:
+        <InformacoesWeb
+            showInstallMessage={showInstallMessage}
+            options={options}
+            values={values}
+            ruSelecionado={ruSelecionado}
+            setRU={setRU}
+            horarios={horarios}
+        />
     );
 }

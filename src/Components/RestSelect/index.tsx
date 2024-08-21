@@ -1,5 +1,6 @@
 /*------------------------Import dos Componentes------------------------*/
-import { RestSelectDiv, RestTitle, SelectImg, SelectOption } from "./style";
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
 
 /*------------------------Import das Imagens------------------------*/
 import Central from '../../Assets/Restaurante/RUcentral.jpg';
@@ -8,6 +9,7 @@ import Pv from '../../Assets/Restaurante/ifcspv.png';
 import Duque from '../../Assets/Restaurante/duque.png';
 import { useState } from "react";
 import { global } from "../../globalStyle";
+import ImportStyle from "../../Functions/ImportStyle";
 
 type propriedades = {
     childToParent: Function
@@ -63,28 +65,30 @@ export default function RestSelect({childToParent}: propriedades) {
         setRu(value);
     }
 
+    const { RestSelectDiv, RestTitle, SelectImg, SelectOption } = ImportStyle(styleMobile, styleWeb);
+
     return (
         <RestSelectDiv>
             <SelectOption id="ruOption" value="ct"
-            onClick={(e) => {ruHandler(e.currentTarget.value)}}>
+            onClick={(e: any) => {ruHandler(e.currentTarget.value)}}>
                 <SelectImg src={Central} alt='Foto do RU central'/>
                 <RestTitle>Central, CT e Letras</RestTitle>
             </SelectOption>
 
             <SelectOption id="ruOption" value="pv"
-            onClick={(e) => {ruHandler(e.currentTarget.value)}}>
+            onClick={(e: any) => {ruHandler(e.currentTarget.value)}}>
                 <SelectImg src={Pv} alt='Foto do RU da Praia Vermelha'/>
                 <RestTitle>IFCS e Praia Vermelha</RestTitle>
             </SelectOption>
 
             <SelectOption id="ruOption" value="dc"
-            onClick={(e) => {ruHandler(e.currentTarget.value)}}>
+            onClick={(e: any) => {ruHandler(e.currentTarget.value)}}>
                 <SelectImg src={Duque} alt='Foto do RU de Duque de Caxias'/>
                 <RestTitle>Duque de Caxias</RestTitle>
             </SelectOption>
 
             <SelectOption id="ruOption" value="mc"
-            onClick={(e) => {ruHandler(e.currentTarget.value)}}>
+            onClick={(e: any) => {ruHandler(e.currentTarget.value)}}>
                 <SelectImg src={Macae} alt='Foto do RU de Macaé'/>
                 <RestTitle>Macaé</RestTitle>
             </SelectOption>

@@ -57,6 +57,49 @@ export const AvaSection = styled.section `
 
 /*----------------------------------------------------------------------------*/
 
+export const AvaTitle = styled.h3 `
+    padding: 0 0 0 1%;
+
+    font-family: ${global.fonts.quickSand};
+    font-size: 4.44vw;
+    font-weight: 700;
+
+    color: ${global.colors.cinza};
+`;
+
+export const AvaSubtitle = styled.p `
+    padding: 0 0 0 1%;
+
+    font-family: ${global.fonts.quickSand};
+    font-size: 3.33vw;
+    font-weight: 500;
+    
+    color: ${global.colors.cinzaClaro};
+`;
+
+/*----------------------------------------------------------------------------*/
+
+export const SelecionaAvaDivBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    width: 86.25vw;
+
+    border-radius: 16px;
+    background: ${global.colors.branco};
+`;
+
+export const SelecionaAvaDiv = styled.div `
+    display: block;
+    width: 100%;
+    height: 8vh;
+    margin-left: -1.875vw;
+`;
+
+/*----------------------------------------------------------------------------*/
+
 export const EmailInput = styled.input `
     width: calc(90.25% - 4px);
     height: 7.5vh;

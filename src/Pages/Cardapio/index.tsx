@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { ICardapioProps, ISemana } from "../../Types/storage";
 import { ToastContainer, toast } from 'react-toastify';
 import { InstallMessageContext } from "../../Contexts/ShowInstallMessageContext";
-import { CardapioDiv, Sombra, ActionsDiv, 
-        DropHeader, AvisoAtt, Conteudo} from "./style";
+// import { CardapioDiv, Sombra, ActionsDiv, 
+//         DropHeader, AvisoAtt, Conteudo} from "./style";
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
     
 import { useHistory } from "react-router-dom";
 
@@ -19,6 +21,8 @@ import Cabecalho from "../../Components/Cabecalho";
 import "react-toastify/dist/ReactToastify.css";
 
 import ReactGA from "react-ga4";
+import ImportStyle from "../../Functions/ImportStyle";
+import Footer from "../../Components/Footer";
 
 let consultando = false;
 
@@ -29,6 +33,7 @@ const opcoesRestaurante = ['Central, CT e Letras', 'IFCS e Praia Vermelha',
 export default function Cardapio() {
     const history = useHistory();
 
+    const { CardapioDiv, Sombra, ActionsDiv,  DropHeader, AvisoAtt, Conteudo} = ImportStyle(styleMobile, styleWeb);
 
     const [cardapio, setCardapio] = useState<ICardapioProps>();
 
@@ -192,13 +197,16 @@ export default function Cardapio() {
                     <NavBar
                     tggDia={tggDia}
                     semana={passaSemana(cardapio?.semana as ISemana)}/>
-                    <Horario
-                    hora={tggHora}/>
+                    {window.innerWidth/window.innerHeight <= 1 && 
+                        <Horario
+                        hora={tggHora}/>
+                    }
                 </ActionsDiv>
                 <Conteudo id='conteudo'>
                     <Dia
                     hora={hora}
                     cardapio={makePath(dia)}
+                    ru={localStorage.getItem("bandejapp:ruDefault")}
                     />
                     <AvisoAtt>Atualizado em: {`${getAtt(ruAtual + '')}`}</AvisoAtt>
                 </Conteudo>
@@ -208,6 +216,7 @@ export default function Cardapio() {
                 }
             </>
             }
+            <Footer/>
         </CardapioDiv>
     );
 }

@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { RestDiv, RestHeader, RestP, RestTitle } from "./style";
-import { RestButton } from "./style";
+import * as styleMobile from "./style";
+import * as styleWeb from "./styleWeb";
 import RestSelect from "../../Components/RestSelect";
+import ImportStyle from "../../Functions/ImportStyle";
 
 export default function Restaurante() {
     const history = useHistory();
 
     const [data, setData] = useState('');
     const childToParent = (childData: string) => setData(childData);
+
+    const {RestDiv, RestHeader, RestTitle, RestP, RestButton} = ImportStyle(styleMobile, styleWeb)
 
     function RU(){
         if(data.length > 1){
